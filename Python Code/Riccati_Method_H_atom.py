@@ -31,35 +31,37 @@ Elist = [Eminustwo,Eminusone,Ezero,Eone]
 
 
 # Dynamic Programming approach
-iter = 2
-n = 2
-for i in range(iter):
-    Rel_E = Elist[len(Elist)-1]
-    sum_term = 0
-    for m in range(0,n):
-        sum_term += 1/2 * phis0[m]*phis0[n-m-1]
-    prime_term = simplify(1/2* diff(phis0[len(phis0)-1],x))
-    phi_next = simplify((Rel_E + sum_term + prime_term)/(-phiminusone))
-    #print(phi_next)
-    phis0.append(phi_next.copy())
+def approximate_to_order(Elistinit,phiszero,order):
+    iter = order -4
+    if order < 4:
+        return Elistinit[0:order]
+    Elist =Elistinit.copy()
+    phis0 = phiszero.copy()
+    n = 2
+    for i in range(iter):
+        Rel_E = Elist[len(Elist)-1]
+        sum_term = 0
+        for m in range(0,n):
+            sum_term += 1/2 * phis0[m]*phis0[n-m-1]
+        prime_term = simplify(1/2* diff(phis0[len(phis0)-1],x))
+        phi_next = simplify((Rel_E + sum_term + prime_term)/(-phiminusone))
+        #print(phi_next)
+        phis0.append(phi_next.copy())
 
-    E_prime_term = -1/2 *diff(phis0[len(phis0)-1],x).subs(x,0)
-    sum_term_E = 0
-    for j in range(0,n+1):
-        sum_term_E+= -1/2* phis0[j].subs(x,0)*phis0[n-j].subs(x,0)
-    E_next = sum_term_E+ E_prime_term
-    Elist.append(E_next.copy())
-    n+= 1
+        E_prime_term = -1/2 *diff(phis0[len(phis0)-1],x).subs(x,0)
+        sum_term_E = 0
+        for j in range(0,n+1):
+            sum_term_E+= -1/2* phis0[j].subs(x,0)*phis0[n-j].subs(x,0)
+        E_next = sum_term_E+ E_prime_term
+        Elist.append(E_next.copy())
+        n+= 1
+    klist = [k**(-i) for i in range(-2,n)]
+    Energy_list = [klist[i]*Elist[i] for i in range(len(Elist))]
+    Energy_value = sum([Energy_list[i].subs([(ebar,e/k),(k,3)]) for i in range(len(Energy_list))])
+    Real_value =- e**4/2
+    error = abs((Energy_value-Real_value)/Real_value)
+    accuracy = 1-error
+    return (Energy_list,error)
 
+print(approximate_to_order(Elist,phiszero=phis0,order= 100))
 
-# Getting Results
-klist = [k**(-i) for i in range(-2,n)]
-Energy_list = [klist[i]*Elist[i] for i in range(len(Elist))]
-print(Energy_list)
-Energy_value = sum([Energy_list[i].subs([(ebar,e/k),(k,3)]) for i in range(len(Energy_list))])
-print(Energy_value)
-Real_value =- e**4/2
-error = abs((Energy_value-Real_value)/Real_value)
-print(error)
-accuracy = 1-error
-print(accuracy)
