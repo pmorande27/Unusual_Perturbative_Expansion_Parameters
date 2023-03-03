@@ -1,5 +1,5 @@
 from sympy import *
-
+import matplotlib.pyplot as plt
 # Setting Up all variables and functions of use
 x = Symbol('x',positive = True)
 ebar = Symbol('ebar',positive = True)
@@ -33,8 +33,8 @@ Elist = [Eminustwo,Eminusone,Ezero,Eone]
 # Dynamic Programming approach
 def approximate_to_order(Elistinit,phiszero,order):
     iter = order -4
-    if order < 4:
-        return Elistinit[0:order]
+    """if order < 4:
+        return Elistinit[0:order]"""
     Elist =Elistinit.copy()
     phis0 = phiszero.copy()
     n = 2
@@ -56,12 +56,24 @@ def approximate_to_order(Elistinit,phiszero,order):
         Elist.append(E_next.copy())
         n+= 1
     klist = [k**(-i) for i in range(-2,n)]
-    Energy_list = [klist[i]*Elist[i] for i in range(len(Elist))]
+    if order < 4:
+        length = len(Elist) - (4-order)
+    else:
+        length = len(Elist)
+    Energy_list = [klist[i]*Elist[i] for i in range(length)]
     Energy_value = sum([Energy_list[i].subs([(ebar,e/k),(k,3)]) for i in range(len(Energy_list))])
     Real_value =- e**4/2
     error = abs((Energy_value-Real_value)/Real_value)
     accuracy = 1-error
     return (Energy_list,error)
 
-print(approximate_to_order(Elist,phiszero=phis0,order= 100))
+#print(approximate_to_order(Elist,phiszero=phis0,order= 5))
+def plot(n):
+    n_list = [i for i in range(1,n+1)]
+    error_list = [0]*n
+    for j in range(n):
+        error_list[j] = approximate_to_order(Elistinit=Elist,phiszero=phis0,order=n_list[j])[1]
+    plt.plot(n_list,error_list)
+    plt.show()
 
+plot(50)
