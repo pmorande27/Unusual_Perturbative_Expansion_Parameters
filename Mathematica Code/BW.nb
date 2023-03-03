@@ -1,0 +1,2540 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    124627,       2530]
+NotebookOptionsPosition[    122673,       2488]
+NotebookOutlinePosition[    123086,       2504]
+CellTagsIndexPosition[    123043,       2501]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<BenderWu`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.884853359598558*^9, 3.8848533920784283`*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"5cea06be-6032-4097-b827-d2ee780c4249"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "BenderWu", "shdw", 
+   "\"Symbol \\!\\(\\*RowBox[{\\\"\\\\\\\"BenderWu\\\\\\\"\\\"}]\\) appears \
+in multiple contexts \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"BenderWu`\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Global`\\\\\
+\\\"\\\"}], \\\"}\\\"}]\\); definitions in context \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"BenderWu`\\\\\\\"\\\"}]\\) may shadow or be \
+shadowed by other definitions.\"", 2, 3, 4, 16940088381390947189, "Local", 
+   "BenderWu`BenderWu"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{{3.8848533648539286`*^9, 3.884853392933146*^9}},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[3]:=",ExpressionUUID->"83d5af22-90f9-4a5b-8100-fbafecc6589c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "BenderWu"}]], "Input",
+ CellChangeTimes->{{3.8848533990854807`*^9, 3.884853412824339*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"0745c3fc-5043-4690-ab87-69906766317a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"BenderWu function version 1.0. For bug report and \
+suggestions, please contact Tin Sulejmanpasic at \
+tin.sulejmanpasic@gmail.com\\n\\nThe BenderWu function calculates the \
+solution of the differential equation\\n\\n-(1/2)\[Psi]''(x)+1/g^2 \
+\\*SubscriptBox[V, 0](gx)\[Psi](x)+\\*SubscriptBox[V, 2](gx)\[Psi](x)=\
+\[Epsilon]\[Psi](x)\\n\\nas a parturbation series in the coupling g, \
+i.e.\\n\\n\[Psi](x)=\\!\\(\\n\\*UnderoverscriptBox[\\(\[Sum]\\), \\(l = 0\\), \
+\\(\[Infinity]\\)]\\(\\n\\*SuperscriptBox[\\nSubscriptBox[\\(A\\), \\(l\\)], \
+\\(k\\)] \\n\\*SuperscriptBox[\\(x\\), \\(k\\)] \\n\\*SuperscriptBox[\\(g\\), \
+\\(l\\)]\\)\\) ,       \[Epsilon] = \
+\\!\\(\\n\\*UnderoverscriptBox[\\(\[Sum]\\), \\(n = 0\\), \
+\\(\[Infinity]\\)]\\n\\*SubscriptBox[\\(\[Epsilon]\\), \\(2  \
+n\\)]\\)\\n\\nNotice that the expansion of \[Epsilon] is only in powers of \
+g^2. \\n\\nThe call to the function BenderWu has the following \
+syntax\\n\\nBenderWu[{\\*SubscriptBox[V, \\(0\\)][x],\\(\\*SubscriptBox[V, \
+\\(2\\)][x]},x,\[Nu],\\*SubscriptBox[n, \\(max\\)],Options]\\n\\nor \
+\\n\\nBenderWu[Subscript[V, 0][x],x,\[Nu],\\*SubscriptBox[n,max],Options] \
+(for \\*SubscriptBox[V, 2][x]=0)\\n\\nThe respectivelly specify the \
+potentials \\*SubscriptBox[V, \\(0\\)][x] and \\*SubscriptBox[V, \\(2\\)][x], \
+the argument of th epotential (x in this case), the harmonic oscillator level \
+number \[Nu], the maximal order of g^2 and a number of options (see below)\\n\
+\\nIf called without any visualisation options, the function BenderWu returns \
+a list of three elements. The first element gives a list of the perturbative \
+corrections \\*SubscriptBox[\[Epsilon], \\(2  n\\)]\\n\\n{\\*SubscriptBox[\
+\[Epsilon], 0],\\*SubscriptBox[\[Epsilon], 2],\\*SubscriptBox[\[Epsilon], \
+4],..., \\*SubscriptBox[\[Epsilon], \\(2\\*SubscriptBox[n,max]\\)]}\\n\\nThe \
+second element returns a matrix\\n\\n\\*SuperscriptBox[SubscriptBox[A, \
+\\(l\\)], \\(k\\)],      l=0,1,...,2*n_max, \
+k=0,1,...,\[Nu]+3*(2*n_max)\\n\\nwhile the third element returns a list of \
+four elements required for processing by the function BWProcess.\\n\\nOptions \
+and their possible values are (default value listed first): \\nEvaluation->\\\
+\"Analytical\\\", \
+Evaluation->\\\"Numerical\\\",\\nWorkingPrecision->MachinePrecision (The \
+working precision if the Evaluation is \\\"Numerical\\\")\\nCoupling->g (A \
+symbol to be used for coupling in output)\\nMonitor->True,Monitor->False \
+(Enable or disable the computation monitor) \\nSimplify->False,Simplify->True \
+(Simplify the expressions at intermediate steps - Turning this on may speed \
+up analytic evaluations)\\nMaxTime->Infinity, (time in seconds allowed for a \
+single order computation.)\\nTotalMaxTime->Infinity, (time in minutes allowed \
+to generate the series.)\\n\\nThe BenderWu function calles the function \
+BWProcess to generate the output, and therefore it also takes in options \
+shared by the function BWProcess. These are called the visaulisation options.\
+\\n\\nOutput->\\\"BWProcess\\\", Output->\\\"Energy\\\" (output energy), \
+Output->\\\"WaveFunction\\\" (output \
+wave-function)\\nOutputStyle->\\\"Array\\\", OutputStyle->\\\"Series\\\" \
+(display the output as a series in the coupling), OutputStyle->\\\"MatrixForm\
+\\\" (display output as a matrix),\\nSeriesOutput->\\\"Coupling\\\" (group \
+coupling in wave-function) ,SeriesOutput->\\\"Argument\\\" (group powers of \
+argument x in wave-function)\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"BenderWu", "[", 
+                    
+                    RowBox[{
+                    "BenderWu`Private`Potential_", ",", "BenderWu`Private`x_",
+                     ",", "BenderWu`Private`nu_", ",", 
+                    "BenderWu`Private`ord_", ",", 
+                    RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`l", ",", "BenderWu`Private`vf", 
+                    ",", "BenderWu`Private`v", ",", "BenderWu`Private`A", ",",
+                     "BenderWu`Private`epsilon", ",", 
+                    "BenderWu`Private`omega", ",", "BenderWu`Private`L", ",", 
+                    "BenderWu`Private`lstep", ",", 
+                    "BenderWu`Private`evencheck", ",", "BenderWu`Private`V", 
+                    ",", "BenderWu`Private`Vf", ",", 
+                    "BenderWu`Private`TimeTemp", ",", "BenderWu`Private`even",
+                     ",", "BenderWu`Private`MonitorDelay", ",", 
+                    "BenderWu`Private`k", ",", "BenderWu`Private`e0", ",", 
+                    "BenderWu`Private`i", ",", "BenderWu`Private`coupling", 
+                    ",", "BenderWu`Private`lmax", ",", 
+                    "BenderWu`Private`vmax", ",", "BenderWu`Private`vfmax", 
+                    ",", "BenderWu`Private`timesteptemp"}], "}"}], ",", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Echo", "]"}], "\[Equal]", 
+                    "True"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", "\"BenderWu function ver 1.0\"", 
+                    "]"}], ";", 
+                    
+                    RowBox[{"Print", "[", 
+                    "\"To turn off these messages use the option Echo->False. \
+\\nTo turn off monitoring use option Monitor->False.\"", "]"}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{
+                    RowBox[{"Head", "[", "BenderWu`Private`nu", "]"}], "=!=", 
+                    "Integer"}], "]"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", 
+                    "\"The level number must be an integer. Aborting...\"", 
+                    "]"}], ";", 
+                    RowBox[{"Return", "[", "]"}], ";"}]}], "]"}], ";", 
+                    RowBox[{"BenderWu`Private`lmax", "=", 
+                    RowBox[{"2", " ", "BenderWu`Private`ord"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{
+                    RowBox[{"Head", "[", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Coupling", 
+                    "]"}], "]"}], "===", "String"}], "]"}], ",", 
+                    RowBox[{"BenderWu`Private`coupling", "=", 
+                    RowBox[{"ToExpression", "[", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Coupling", 
+                    "]"}], "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`coupling", "=", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Coupling", 
+                    "]"}]}]}], "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{
+                    RowBox[{"Head", "[", "BenderWu`Private`Potential", "]"}], 
+                    "\[Equal]", "List"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    
+                    RowBox[{"Length", "[", "BenderWu`Private`Potential", 
+                    "]"}], "\[Equal]", "2"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`V", "=", 
+                    
+                    RowBox[{"BenderWu`Private`Potential", 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+                    ";", 
+                    RowBox[{"BenderWu`Private`Vf", "=", 
+                    
+                    RowBox[{"BenderWu`Private`Potential", 
+                    "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                    ";"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", 
+                    "\"Error in the input of the potential! Input: \
+BenderWu[V[x],x... or BenderWu[{V0[x],V2[x]},x]\"", "]"}], ";", 
+                    RowBox[{"Return", "[", "$Aborted", "]"}], ";"}]}], "]"}], 
+                    ";"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`V", "=", 
+                    "BenderWu`Private`Potential"}], ";", 
+                    RowBox[{"BenderWu`Private`Vf", "=", "0"}], ";"}]}], "]"}],
+                     ";", 
+                    RowBox[{"BenderWu`Private`omega", "=", 
+                    RowBox[{"Simplify", "[", 
+                    SqrtBox[
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["\[PartialD]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`x", ",", "2"}], "}"}]}]], 
+                    "BenderWu`Private`V"}], "/.", "\[VeryThinSpace]", 
+                    RowBox[{"BenderWu`Private`x", "\[Rule]", "0"}]}]], 
+                    "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`omega", "\[Equal]", "0"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", 
+                    "\"The quadratic term of the potential is zero. \
+Aborting...\"", "]"}], ";", 
+                    RowBox[{"Return", "[", "$Aborted", "]"}], ";"}]}], "]"}], 
+                    ";", 
+                    RowBox[{"BenderWu`Private`e0", "=", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`omega", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`nu", "+", 
+                    FractionBox["1", "2"]}], ")"}]}], "+", 
+                    "BenderWu`Private`Vf"}], "/.", "\[VeryThinSpace]", 
+                    RowBox[{"BenderWu`Private`x", "\[Rule]", "0"}]}]}], ";", 
+                    RowBox[{"BenderWu`Private`v", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Evaluate", "[", 
+                    FractionBox[
+                    RowBox[{
+                    SubscriptBox["\[PartialD]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`x", ",", 
+                    RowBox[{"BenderWu`Private`i", "+", "2"}]}], "}"}]}]], 
+                    FractionBox["BenderWu`Private`V", 
+                    SuperscriptBox["BenderWu`Private`omega", "2"]]}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`i", "+", "2"}], ")"}], "!"}]], 
+                    "]"}], "/.", "\[VeryThinSpace]", 
+                    RowBox[{"BenderWu`Private`x", "\[Rule]", "0"}]}], ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`i", ",", "1", ",", 
+                    "BenderWu`Private`lmax"}], "}"}]}], "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`vf", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"Evaluate", "[", 
+                    RowBox[{
+                    SubscriptBox["\[PartialD]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`x", ",", "BenderWu`Private`i"}],
+                     "}"}]}]], 
+                    FractionBox[
+                    "BenderWu`Private`Vf", "BenderWu`Private`omega"]}], "]"}], 
+                    RowBox[{"BenderWu`Private`i", "!"}]], "/.", 
+                    "\[VeryThinSpace]", 
+                    RowBox[{"BenderWu`Private`x", "\[Rule]", "0"}]}], ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`i", ",", "1", ",", 
+                    "BenderWu`Private`lmax"}], "}"}]}], "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`v", "\[LeftDoubleBracket]", 
+                    RowBox[{"Length", "[", "BenderWu`Private`v", "]"}], 
+                    "\[RightDoubleBracket]"}], "=!=", "0"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`vmax", "=", 
+                    RowBox[{"Length", "[", "BenderWu`Private`v", "]"}]}], 
+                    ";"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`vmax", "=", 
+                    RowBox[{"Length", "[", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"Drop", "[", 
+                    RowBox[{
+                    RowBox[{"Split", "[", "BenderWu`Private`v", "]"}], ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "]"}], "]"}]}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`vf", "\[LeftDoubleBracket]", 
+                    RowBox[{"Length", "[", "BenderWu`Private`vf", "]"}], 
+                    "\[RightDoubleBracket]"}], "=!=", "0"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`vfmax", "=", 
+                    RowBox[{"Length", "[", "BenderWu`Private`vf", "]"}]}], 
+                    ";"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`vfmax", "=", 
+                    RowBox[{"Length", "[", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"Drop", "[", 
+                    RowBox[{
+                    RowBox[{"Split", "[", "BenderWu`Private`vf", "]"}], ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "]"}], "]"}]}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"BenderWu`Private`even", "=", "0"}], ";", 
+                    RowBox[{"BenderWu`Private`evencheck", "=", 
+                    RowBox[{"Sum", "[", 
+                    RowBox[{
+                    RowBox[{
+                    SuperscriptBox[
+                    
+                    RowBox[{"BenderWu`Private`v", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`i", "\[RightDoubleBracket]"}], "2"], 
+                    "+", 
+                    SuperscriptBox[
+                    
+                    RowBox[{"BenderWu`Private`vf", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`i", "\[RightDoubleBracket]"}], "2"]}], 
+                    ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`i", ",", "1", ",", 
+                    "BenderWu`Private`lmax", ",", "2"}], "}"}]}], "]"}]}], 
+                    ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{"BenderWu`Private`evencheck", "\[Equal]", "0"}], 
+                    "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lstep", "=", "2"}], ";", 
+                    RowBox[{"BenderWu`Private`even", "=", "1"}], ";"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lstep", "=", "1"}], ";", 
+                    RowBox[{"BenderWu`Private`even", "=", "0"}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"BenderWu`Private`A", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`l", ",", "0", ",", 
+                    "BenderWu`Private`lmax"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`k", ",", "0", ",", 
+                    RowBox[{"BenderWu`Private`nu", "+", 
+                    RowBox[{"3", " ", "BenderWu`Private`lmax"}], "+", "2"}]}],
+                     "}"}]}], "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`epsilon", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`i", ",", "1", ",", 
+                    RowBox[{"Floor", "[", 
+                    FractionBox["BenderWu`Private`lmax", "2"], "]"}]}], 
+                    "}"}]}], "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Evaluation",
+                     "]"}], "\[Equal]", "\"Numerical\""}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"BenderWu`Private`nu", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    RowBox[{"N", "[", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"OptionValue", "[", "WorkingPrecision", "]"}]}], 
+                    "]"}]}], ";"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"BenderWu`Private`nu", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", "1"}], ";"}]}], "]"}], 
+                    ";", 
+                    RowBox[{"BenderWu`Private`timesteptemp", "=", "1"}], ";", 
+                    RowBox[{"BenderWu`Private`timeratio", "=", "0"}], ";", 
+                    RowBox[{"BenderWu`Private`BeginingOfTime", "=", 
+                    RowBox[{"AbsoluteTime", "[", "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`CPUtimestep", "=", "0"}], ";", 
+                    RowBox[{"BenderWu`Private`k", "=", "0"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Monitor", "]"}], "\[Equal]", 
+                    "True"}], "&&", 
+                    RowBox[{
+                    RowBox[{"NumericQ", "[", 
+                    
+                    RowBox[{"BenderWu`Private`l", " ", "BenderWu`Private`k", 
+                    " ", "BenderWu`Private`CPUtimestep", " ", 
+                    "BenderWu`Private`TimeLapsed"}], "]"}], "\[Equal]", 
+                    "True"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`MonitorCell", "=", 
+                    RowBox[{"PrintTemporary", "[", 
+                    RowBox[{"\"Computing order: \"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    FractionBox["BenderWu`Private`l", "2"], "]"}], "-", "1"}],
+                     "]"}], ",", "\"\\nComputing polynomial power: \"", ",", 
+                    RowBox[{"Dynamic", "[", "BenderWu`Private`k", "]"}], ",", 
+                    "\"\\nCPU time per order: \"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    FractionBox[
+                    RowBox[{"Floor", "[", 
+                    
+                    RowBox[{"2", " ", "BenderWu`Private`CPUtimestep", " ", 
+                    "10"}], "]"}], "10.`"], "]"}], ",", 
+                    "\" seconds.\\nMemory in use: \"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Floor", "[", 
+                    FractionBox[
+                    RowBox[{"MemoryInUse", "[", "]"}], 
+                    SuperscriptBox["1024", "2"]], "]"}], "]"}], ",", 
+                    "\" MB\"", ",", "\"\\nTotal time elapsed: \"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Floor", "[", 
+                    FractionBox["BenderWu`Private`TimeLapsed", "60"], "]"}], 
+                    "]"}], ",", "\" minutes and \"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"Mod", "[", 
+                    RowBox[{"BenderWu`Private`TimeLapsed", ",", "60"}], "]"}],
+                     "]"}], "]"}], ",", "\" seconds.\""}], "]"}]}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"BenderWu`Private`tmtot", "=", 
+                    RowBox[{"TimeConstrained", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "=", "0"}], ",", 
+                    
+                    RowBox[{"BenderWu`Private`l", "\[LessEqual]", 
+                    "BenderWu`Private`lmax"}], ",", 
+                    
+                    RowBox[{"BenderWu`Private`l", "+=", 
+                    "BenderWu`Private`lstep"}], ",", 
+                    RowBox[{
+                    RowBox[{"ClearSystemCache", "[", "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "\[Equal]", "240"}], ",", 
+                    RowBox[{"SetSystemOptions", "[", 
+                    RowBox[{"\"CompileOptions\"", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"\"SumCompileLength\"", "\[Rule]", 
+                    RowBox[{"BenderWu`Private`lmax", "+", "10"}]}], "}"}]}], 
+                    "]"}]}], "]"}], ";", 
+                    RowBox[{"BenderWu`Private`tm", "=", 
+                    RowBox[{"TimeConstrained", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`CPUtimebeg", "=", 
+                    RowBox[{"TimeUsed", "[", "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`timebeg", "=", 
+                    RowBox[{"AbsoluteTime", "[", "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`TimeLapsed", "=", 
+                    RowBox[{
+                    RowBox[{"AbsoluteTime", "[", "]"}], "-", 
+                    "BenderWu`Private`BeginingOfTime"}]}], ";", "Null", ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", ">", "0"}], ",", 
+                    RowBox[{
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`k", "=", 
+                    RowBox[{"BenderWu`Private`nu", "+", 
+                    RowBox[{"3", " ", "BenderWu`Private`l"}]}]}], ",", 
+                    
+                    RowBox[{"BenderWu`Private`k", ">", 
+                    "BenderWu`Private`nu"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "--"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    FractionBox[
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`k", "+", "2"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}], ")"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "2", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}]}], "+", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Floor", "[", 
+                    FractionBox["BenderWu`Private`l", "2"], "]"}]], 
+                    RowBox[{"2", " ", 
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", "BenderWu`Private`n", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "-", 
+                    RowBox[{"2", " ", "BenderWu`Private`n"}], "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}]}]}], "-", 
+                    RowBox[{"2", " ", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`k", "-", "2"}], ",", 
+                    "BenderWu`Private`l", ",", "BenderWu`Private`vmax"}], 
+                    "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`v", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "-", "BenderWu`Private`n", 
+                    "-", "2", "+", "1"}]}], "\[RightDoubleBracket]"}]}]}]}], 
+                    "-", 
+                    RowBox[{"2", " ", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    
+                    RowBox[{"BenderWu`Private`k", ",", "BenderWu`Private`l", 
+                    ",", "BenderWu`Private`vfmax"}], "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`vf", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "-", "BenderWu`Private`n", 
+                    "+", "1"}]}], "\[RightDoubleBracket]"}]}]}]}]}], 
+                    RowBox[{"2", " ", 
+                    RowBox[{"(", 
+                    
+                    RowBox[{"BenderWu`Private`k", "-", 
+                    "BenderWu`Private`nu"}], ")"}]}]]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Simplify", "]"}], "\[Equal]",
+                     "True"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    RowBox[{"Simplify", "[", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "]"}]}]}], "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Mod", "[", 
+                    RowBox[{"BenderWu`Private`l", ",", "2"}], "]"}], 
+                    "\[Equal]", "0"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", 
+                    FractionBox["BenderWu`Private`l", "2"], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    RowBox[{
+                    RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"-", 
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`nu", "+", "2"}], ")"}]}], ")"}],
+                     " ", 
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`nu", "+", "1"}], ")"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`nu", "+", "2", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}]}], "+", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    RowBox[{"BenderWu`Private`l", ",", 
+                    RowBox[{"BenderWu`Private`nu", "-", "2"}]}], "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`v", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`nu", "-", "BenderWu`Private`n", 
+                    "-", "2", "+", "1"}]}], "\[RightDoubleBracket]"}]}]}], 
+                    "+", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    
+                    RowBox[{"BenderWu`Private`l", ",", 
+                    "BenderWu`Private`nu"}], "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`vf", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`nu", "-", "BenderWu`Private`n", 
+                    "+", "1"}]}], "\[RightDoubleBracket]"}]}]}]}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Simplify", "]"}], "\[Equal]",
+                     "True"}], ",", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", 
+                    FractionBox["BenderWu`Private`l", "2"], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    RowBox[{"Simplify", "[", 
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", 
+                    FractionBox["BenderWu`Private`l", "2"], 
+                    "\[RightDoubleBracket]"}], "]"}]}]}], "]"}], ";"}]}], 
+                    "]"}], ";"}]}], "]"}], ";"}]}], "]"}], ";", 
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`k", "=", 
+                    RowBox[{"BenderWu`Private`nu", "-", "1"}]}], ",", 
+                    RowBox[{"BenderWu`Private`k", "\[GreaterEqual]", "0"}], 
+                    ",", 
+                    RowBox[{"BenderWu`Private`k", "--"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    FractionBox[
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`k", "+", "2"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}], ")"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "2", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}]}], "+", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Floor", "[", 
+                    FractionBox["BenderWu`Private`l", "2"], "]"}]], 
+                    RowBox[{"2", " ", 
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", "BenderWu`Private`n", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "-", 
+                    RowBox[{"2", " ", "BenderWu`Private`n"}], "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}]}]}], "-", 
+                    RowBox[{"2", " ", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`k", "-", "2"}], ",", 
+                    "BenderWu`Private`l"}], "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`v", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "-", "BenderWu`Private`n", 
+                    "-", "2", "+", "1"}]}], "\[RightDoubleBracket]"}]}]}]}], 
+                    "-", 
+                    RowBox[{"2", " ", 
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"BenderWu`Private`n", "=", "1"}], 
+                    RowBox[{"Min", "[", 
+                    RowBox[{"BenderWu`Private`k", ",", "BenderWu`Private`l"}],
+                     "]"}]], 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`vf", "\[LeftDoubleBracket]", 
+                    "BenderWu`Private`n", "\[RightDoubleBracket]"}], " ", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`l", "-", "BenderWu`Private`n", 
+                    "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "-", "BenderWu`Private`n", 
+                    "+", "1"}]}], "\[RightDoubleBracket]"}]}]}]}]}], 
+                    RowBox[{"2", " ", 
+                    RowBox[{"(", 
+                    
+                    RowBox[{"BenderWu`Private`k", "-", 
+                    "BenderWu`Private`nu"}], ")"}]}]]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Simplify", "]"}], "\[Equal]",
+                     "True"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "=", 
+                    RowBox[{"Simplify", "[", 
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`l", "+", "1"}], ",", 
+                    RowBox[{"BenderWu`Private`k", "+", "1"}]}], 
+                    "\[RightDoubleBracket]"}], "]"}]}]}], "]"}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"BenderWu`Private`CPUtimestep", "=", 
+                    RowBox[{
+                    RowBox[{"TimeUsed", "[", "]"}], "-", 
+                    "BenderWu`Private`CPUtimebeg"}]}], ";", 
+                    RowBox[{"BenderWu`Private`timestep", "=", 
+                    RowBox[{
+                    RowBox[{"AbsoluteTime", "[", "]"}], "-", 
+                    "BenderWu`Private`timebeg"}]}], ";"}], ",", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`MaxTime", 
+                    "]"}]}], "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`tm", "\[Equal]", "$Aborted"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lmax", "=", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Floor", "[", 
+                    FractionBox[
+                    RowBox[{"BenderWu`Private`l", "-", "1"}], "2"], "]"}]}]}],
+                     ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lmax", "<", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{"Return", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", 
+                    "\"Error... No orders were computed. Check that time \
+constraint MaxTime is not too small.\"", "]"}], ";"}], "]"}], ";"}]}], "]"}], 
+                    ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Warnings", 
+                    "]"}], "\[Equal]", "True"}], ",", 
+                    RowBox[{
+                    RowBox[{"Print", "[", 
+                    
+                    RowBox[{
+                    "\"WARNING: Time constraint for a single order exeeded \
+\"", ",", 
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`MaxTime", 
+                    "]"}], ",", "\" seconds  at order \"", ",", 
+                    SuperscriptBox[
+                    "BenderWu`Private`coupling", "BenderWu`Private`l"], ",", 
+                    "\".\""}], "]"}], ";", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"Output generated to order \"", ",", 
+                    RowBox[{"Evaluate", "[", 
+                    SuperscriptBox[
+                    "BenderWu`Private`coupling", "BenderWu`Private`lmax"], 
+                    "]"}]}], "]"}], ";"}]}], "]"}], ";", 
+                    RowBox[{"Break", "[", "]"}], ";"}]}], "]"}], ";"}]}], 
+                    "]"}], ";"}], ",", 
+                    RowBox[{"Evaluate", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"OptionValue", "[", 
+                    "BenderWu`Private`TotalMaxTime", "]"}], " ", "60"}], 
+                    "]"}]}], "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"BenderWu`Private`tmtot", "\[Equal]", 
+                    "$Aborted"}], ",", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lmax", "=", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Floor", "[", 
+                    FractionBox[
+                    RowBox[{"BenderWu`Private`l", "-", "1"}], "2"], "]"}]}]}],
+                     ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`lmax", "<", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{"Return", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"Print", "[", 
+                    "\"Error... No orders were computed. Check that time \
+constraint TotalMaxTime is not too small.\"", "]"}], ";"}], "]"}], ";"}]}], 
+                    "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Warnings", 
+                    "]"}], "\[Equal]", "True"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Print", "[", 
+                    
+                    RowBox[{
+                    "\"WARNING: Time set to complete the evaluation \"", ",", 
+                    RowBox[{"N", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"OptionValue", "[", 
+                    "BenderWu`Private`TotalMaxTime", "]"}], ",", "1"}], "]"}],
+                     ",", "\" minutes  was exceeded at order \"", ",", 
+                    SuperscriptBox[
+                    "BenderWu`Private`coupling", "BenderWu`Private`l"], ",", 
+                    "\".\""}], "]"}], " ", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"Output generated to order \"", ",", 
+                    RowBox[{"Evaluate", "[", 
+                    SuperscriptBox[
+                    "BenderWu`Private`coupling", "BenderWu`Private`lmax"], 
+                    "]"}]}], "]"}]}], ";"}]}], "]"}], ";"}]}], "]"}], ";", 
+                    
+                    RowBox[{"NotebookDelete", "[", 
+                    "BenderWu`Private`MonitorCell", "]"}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"OptionValue", "[", "Echo", "]"}], "\[Equal]", 
+                    "True"}], ",", 
+                    RowBox[{
+                    RowBox[{"Print", "[", 
+                    
+                    RowBox[{
+                    "\"Longest CPU time spend computing a single order is \"",
+                     ",", 
+                    FractionBox[
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"BenderWu`Private`CPUtimestep", " ", "10"}], 
+                    "]"}], "10.`"], ",", "\" seconds\""}], "]"}], ";", 
+                    RowBox[{"Print", "[", 
+                    
+                    RowBox[{
+                    "\"Longest absolute time spend computing a single order \
+is \"", ",", 
+                    FractionBox[
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"BenderWu`Private`timestep", " ", "10"}], "]"}], 
+                    "10.`"], ",", "\" seconds\""}], "]"}], ";", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"Total time needed for the computation \"", ",", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    FractionBox["1", "60"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"AbsoluteTime", "[", "]"}], "-", 
+                    "BenderWu`Private`BeginingOfTime"}], ")"}]}], "]"}], ",", 
+                    "\" minutes and \"", ",", 
+                    FractionBox[
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{"Mod", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"AbsoluteTime", "[", "]"}], "-", 
+                    "BenderWu`Private`BeginingOfTime"}], ",", "60"}], "]"}], 
+                    " ", "10"}], "]"}], "10.`"], ",", "\" seconds\""}], "]"}],
+                     ";"}]}], "]"}], ";", 
+                    RowBox[{"BenderWu`Private`epsilon", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    FractionBox[
+                    
+                    RowBox[{"BenderWu`Private`epsilon", 
+                    "\[LeftDoubleBracket]", "BenderWu`Private`i", 
+                    "\[RightDoubleBracket]"}], 
+                    SuperscriptBox[
+                    "BenderWu`Private`omega", "BenderWu`Private`i"]], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`i", ",", "1", ",", 
+                    FractionBox["BenderWu`Private`lmax", "2"]}], "}"}]}], 
+                    "]"}]}], ";", 
+                    RowBox[{"BenderWu`Private`A", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"BenderWu`Private`A", "\[LeftDoubleBracket]", 
+                    
+                    RowBox[{"BenderWu`Private`lp", ",", 
+                    "BenderWu`Private`k"}], "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox[
+                    SqrtBox["BenderWu`Private`omega"], 
+                    
+                    RowBox[{"BenderWu`Private`k", "-", 
+                    "BenderWu`Private`lp"}]]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`lp", ",", "1", ",", 
+                    RowBox[{"BenderWu`Private`lmax", "+", "1"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"BenderWu`Private`k", ",", "1", ",", 
+                    RowBox[{"BenderWu`Private`nu", "+", 
+                    RowBox[{"3", " ", "BenderWu`Private`lmax"}], "+", "1"}]}],
+                     "}"}]}], "]"}]}], ";", 
+                    RowBox[{"Return", "[", 
+                    RowBox[{"BWProcess", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Evaluate", "[", 
+                    RowBox[{"BenderWu`Private`V", "/.", "\[VeryThinSpace]", 
+                    RowBox[{"BenderWu`Private`x", "\[Rule]", "0"}]}], "]"}], 
+                    "}"}], ",", 
+                    RowBox[{"{", "BenderWu`Private`e0", "}"}], ",", 
+                    
+                    RowBox[{"BenderWu`Private`omega", " ", 
+                    "BenderWu`Private`epsilon"}]}], "]"}], ",", 
+                    "BenderWu`Private`A", ",", 
+                    RowBox[{"{", 
+                    
+                    RowBox[{"BenderWu`Private`x", ",", "BenderWu`Private`nu", 
+                    ",", "BenderWu`Private`lmax", ",", 
+                    "BenderWu`Private`even"}], "}"}]}], "}"}], ",", 
+                    RowBox[{"BenderWu`Private`Output", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Output", 
+                    "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`OutputStyle", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", 
+                    "BenderWu`Private`OutputStyle", "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`SeriesOutput", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", 
+                    "BenderWu`Private`SeriesOutput", "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`Evaluation", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Evaluation",
+                     "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`Coupling", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`Coupling", 
+                    "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`HighestPower", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", 
+                    "BenderWu`Private`HighestPower", "]"}]}], ",", 
+                    RowBox[{"BenderWu`Private`ArrayForm", "\[Rule]", 
+                    
+                    RowBox[{"OptionValue", "[", "BenderWu`Private`ArrayForm", 
+                    "]"}]}]}], "]"}], "]"}], ";"}]}], "]"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    
+                    StyleBox["\<\" Default Definitions\"\>", 
+                    "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"DefaultValues\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "DefaultValues", "Tooltip"]& ], 
+                   InterpretationBox[GridBox[{
+                    {
+                    RowBox[{
+                    RowBox[{"SyntaxInformation", "[", "BenderWu", "]"}], "=", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\<\"ArgumentsPattern\"\>", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"_", ",", "_", ",", "_", ",", "_", ",", 
+                    RowBox[{"OptionsPattern", "[", "]"}]}], "}"}]}], ",", 
+                    RowBox[{"\<\"LocalVariables\"\>", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"\<\"Solve\"\>", ",", 
+                    RowBox[{"{", "2", "}"}]}], "}"}]}]}], "}"}]}]},
+                    {" "}
+                    },
+                    BaselinePosition->{Baseline, {1, 1}},
+                    
+                    GridBoxAlignment->{
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}],
+                    
+                    ColumnForm[{
+                    SyntaxInformation[BenderWu`BenderWu] = {
+                    "ArgumentsPattern" -> {
+                    Blank[], 
+                    Blank[], 
+                    Blank[], 
+                    Blank[], 
+                    OptionsPattern[]}, "LocalVariables" -> {"Solve", {2}}}, 
+                    SpaceForm[1]}],
+                    Editable->False]},
+                  {
+                   PaneSelectorBox[{True->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 3] = 
+                    False),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"], False->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 3] = 
+                    True),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 3]]], 
+                   PaneSelectorBox[{True->GridBox[{
+                    {
+                    RowBox[{
+                    "BenderWu`Private`Output", 
+                    "\[Rule]", "\<\"BWProcess\"\>"}]},
+                    {
+                    RowBox[{
+                    "WorkingPrecision", "\[Rule]", "MachinePrecision"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`MaxTime", "\[Rule]", "\[Infinity]"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`TotalMaxTime", "\[Rule]", 
+                    "\[Infinity]"}]},
+                    {
+                    RowBox[{"BenderWu`Private`Warnings", "\[Rule]", "True"}]},
+                    {
+                    RowBox[{"Simplify", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`OutputStyle", 
+                    "\[Rule]", "\<\"Array\"\>"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`SeriesOutput", 
+                    "\[Rule]", "\<\"Coupling\"\>"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`Evaluation", 
+                    "\[Rule]", "\<\"Analytical\"\>"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`Coupling", "\[Rule]", "\<\"g\"\>"}]},
+                    {
+                    RowBox[{"BenderWu`Private`HighestPower", "\[Rule]", "0"}]},
+                    {
+                    RowBox[{
+                    "BenderWu`Private`ArrayForm", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{"Echo", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{"Monitor", "\[Rule]", "True"}]},
+                    {
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "14", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}
+                    },
+                    BaselinePosition->{Baseline, {1, 1}},
+                    DefaultBaseStyle->"Column",
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{1.}}}], False->
+                    RowBox[{
+                    RowBox[{
+                    "BenderWu`Private`Output", 
+                    "\[Rule]", "\<\"BWProcess\"\>"}], "\[ThinSpace]", 
+                    StyleBox["\<\"\[Ellipsis]\"\>", "InformationRowOpener",
+                    StripOnInput->False], "\[ThinSpace]", 
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "14", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 3]],
+                    BaselinePosition->Baseline,
+                    ImageSize->Automatic]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", "HoldAll", "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"BenderWu`BenderWu\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"BenderWu function version 1.0. For bug report and \
+suggestions, please contact Tin Sulejmanpasic at \
+tin.sulejmanpasic@gmail.com\\n\\nThe BenderWu function calculates the \
+solution of the differential equation\\n\\n-(1/2)\[Psi]''(x)+1/g^2 \
+\\*SubscriptBox[V, 0](gx)\[Psi](x)+\\*SubscriptBox[V, 2](gx)\[Psi](x)=\
+\[Epsilon]\[Psi](x)\\n\\nas a parturbation series in the coupling g, \
+i.e.\\n\\n\[Psi](x)=\\!\\(\\n\\*UnderoverscriptBox[\\(\[Sum]\\), \\(l = 0\\), \
+\\(\[Infinity]\\)]\\(\\n\\*SuperscriptBox[\\nSubscriptBox[\\(A\\), \\(l\\)], \
+\\(k\\)] \\n\\*SuperscriptBox[\\(x\\), \\(k\\)] \\n\\*SuperscriptBox[\\(g\\), \
+\\(l\\)]\\)\\) ,       \[Epsilon] = \
+\\!\\(\\n\\*UnderoverscriptBox[\\(\[Sum]\\), \\(n = 0\\), \
+\\(\[Infinity]\\)]\\n\\*SubscriptBox[\\(\[Epsilon]\\), \\(2  \
+n\\)]\\)\\n\\nNotice that the expansion of \[Epsilon] is only in powers of \
+g^2. \\n\\nThe call to the function BenderWu has the following \
+syntax\\n\\nBenderWu[{\\*SubscriptBox[V, \\(0\\)][x],\\(\\*SubscriptBox[V, \
+\\(2\\)][x]},x,\[Nu],\\*SubscriptBox[n, \\(max\\)],Options]\\n\\nor \
+\\n\\nBenderWu[Subscript[V, 0][x],x,\[Nu],\\*SubscriptBox[n,max],Options] \
+(for \\*SubscriptBox[V, 2][x]=0)\\n\\nThe respectivelly specify the \
+potentials \\*SubscriptBox[V, \\(0\\)][x] and \\*SubscriptBox[V, \\(2\\)][x], \
+the argument of th epotential (x in this case), the harmonic oscillator level \
+number \[Nu], the maximal order of g^2 and a number of options (see below)\\n\
+\\nIf called without any visualisation options, the function BenderWu returns \
+a list of three elements. The first element gives a list of the perturbative \
+corrections \\*SubscriptBox[\[Epsilon], \\(2  n\\)]\\n\\n{\\*SubscriptBox[\
+\[Epsilon], 0],\\*SubscriptBox[\[Epsilon], 2],\\*SubscriptBox[\[Epsilon], \
+4],..., \\*SubscriptBox[\[Epsilon], \\(2\\*SubscriptBox[n,max]\\)]}\\n\\nThe \
+second element returns a matrix\\n\\n\\*SuperscriptBox[SubscriptBox[A, \
+\\(l\\)], \\(k\\)],      l=0,1,...,2*n_max, \
+k=0,1,...,\[Nu]+3*(2*n_max)\\n\\nwhile the third element returns a list of \
+four elements required for processing by the function BWProcess.\\n\\nOptions \
+and their possible values are (default value listed first): \\nEvaluation->\\\
+\"Analytical\\\", \
+Evaluation->\\\"Numerical\\\",\\nWorkingPrecision->MachinePrecision (The \
+working precision if the Evaluation is \\\"Numerical\\\")\\nCoupling->g (A \
+symbol to be used for coupling in output)\\nMonitor->True,Monitor->False \
+(Enable or disable the computation monitor) \\nSimplify->False,Simplify->True \
+(Simplify the expressions at intermediate steps - Turning this on may speed \
+up analytic evaluations)\\nMaxTime->Infinity, (time in seconds allowed for a \
+single order computation.)\\nTotalMaxTime->Infinity, (time in minutes allowed \
+to generate the series.)\\n\\nThe BenderWu function calles the function \
+BWProcess to generate the output, and therefore it also takes in options \
+shared by the function BWProcess. These are called the visaulisation options.\
+\\n\\nOutput->\\\"BWProcess\\\", Output->\\\"Energy\\\" (output energy), \
+Output->\\\"WaveFunction\\\" (output \
+wave-function)\\nOutputStyle->\\\"Array\\\", OutputStyle->\\\"Series\\\" \
+(display the output as a series in the coupling), OutputStyle->\\\"MatrixForm\
+\\\" (display output as a matrix),\\nSeriesOutput->\\\"Coupling\\\" (group \
+coupling in wave-function) ,SeriesOutput->\\\"Argument\\\" (group powers of \
+argument x in wave-function)\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "BenderWu function version 1.0. For bug report and suggestions, please \
+contact Tin Sulejmanpasic at tin.sulejmanpasic@gmail.com\n\nThe BenderWu \
+function calculates the solution of the differential equation\n\n\
+-(1/2)\[Psi]''(x)+1/g^2 \*SubscriptBox[V, 0](gx)\[Psi](x)+\*SubscriptBox[V, \
+2](gx)\[Psi](x)=\[Epsilon]\[Psi](x)\n\nas a parturbation series in the \
+coupling g, i.e.\n\n\[Psi](x)=\!\(\n\*UnderoverscriptBox[\(\[Sum]\), \(l = \
+0\), \(\[Infinity]\)]\(\n\*SuperscriptBox[\nSubscriptBox[\(A\), \(l\)], \
+\(k\)] \n\*SuperscriptBox[\(x\), \(k\)] \n\*SuperscriptBox[\(g\), \(l\)]\)\) \
+,       \[Epsilon] = \!\(\n\*UnderoverscriptBox[\(\[Sum]\), \(n = 0\), \(\
+\[Infinity]\)]\n\*SubscriptBox[\(\[Epsilon]\), \(2  n\)]\)\n\nNotice that the \
+expansion of \[Epsilon] is only in powers of g^2. \n\nThe call to the \
+function BenderWu has the following syntax\n\nBenderWu[{\*SubscriptBox[V, \(0\
+\)][x],\(\*SubscriptBox[V, \(2\)][x]},x,\[Nu],\*SubscriptBox[n, \
+\(max\)],Options]\n\nor \n\nBenderWu[Subscript[V, \
+0][x],x,\[Nu],\*SubscriptBox[n,max],Options] (for \*SubscriptBox[V, 2][x]=0)\n\
+\nThe respectivelly specify the potentials \*SubscriptBox[V, \(0\)][x] and \
+\*SubscriptBox[V, \(2\)][x], the argument of th epotential (x in this case), \
+the harmonic oscillator level number \[Nu], the maximal order of g^2 and a \
+number of options (see below)\n\nIf called without any visualisation options, \
+the function BenderWu returns a list of three elements. The first element \
+gives a list of the perturbative corrections \*SubscriptBox[\[Epsilon], \(2  \
+n\)]\n\n{\*SubscriptBox[\[Epsilon], 0],\*SubscriptBox[\[Epsilon], \
+2],\*SubscriptBox[\[Epsilon], 4],..., \*SubscriptBox[\[Epsilon], \
+\(2\*SubscriptBox[n,max]\)]}\n\nThe second element returns a matrix\n\n\
+\*SuperscriptBox[SubscriptBox[A, \(l\)], \(k\)],      l=0,1,...,2*n_max, \
+k=0,1,...,\[Nu]+3*(2*n_max)\n\nwhile the third element returns a list of four \
+elements required for processing by the function BWProcess.\n\nOptions and \
+their possible values are (default value listed first): \n\
+Evaluation->\"Analytical\", Evaluation->\"Numerical\",\n\
+WorkingPrecision->MachinePrecision (The working precision if the Evaluation \
+is \"Numerical\")\nCoupling->g (A symbol to be used for coupling in output)\n\
+Monitor->True,Monitor->False (Enable or disable the computation monitor) \n\
+Simplify->False,Simplify->True (Simplify the expressions at intermediate \
+steps - Turning this on may speed up analytic evaluations)\n\
+MaxTime->Infinity, (time in seconds allowed for a single order computation.)\n\
+TotalMaxTime->Infinity, (time in minutes allowed to generate the series.)\n\n\
+The BenderWu function calles the function BWProcess to generate the output, \
+and therefore it also takes in options shared by the function BWProcess. \
+These are called the visaulisation options.\n\nOutput->\"BWProcess\", \
+Output->\"Energy\" (output energy), Output->\"WaveFunction\" (output \
+wave-function)\nOutputStyle->\"Array\", OutputStyle->\"Series\" (display the \
+output as a series in the coupling), OutputStyle->\"MatrixForm\" (display \
+output as a matrix),\nSeriesOutput->\"Coupling\" (group coupling in \
+wave-function) ,SeriesOutput->\"Argument\" (group powers of argument x in \
+wave-function)", "Documentation" -> None, "OwnValues" -> None, "UpValues" -> 
+    None, "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, BenderWu`BenderWu, {BenderWu`BenderWu[
+         Pattern[BenderWu`Private`Potential, 
+          Blank[]], 
+         Pattern[BenderWu`Private`x, 
+          Blank[]], 
+         Pattern[BenderWu`Private`nu, 
+          Blank[]], 
+         Pattern[BenderWu`Private`ord, 
+          Blank[]], 
+         OptionsPattern[]] :> 
+       Module[{BenderWu`Private`l, BenderWu`Private`vf, BenderWu`Private`v, 
+          BenderWu`Private`A, BenderWu`Private`epsilon, 
+          BenderWu`Private`omega, BenderWu`Private`L, BenderWu`Private`lstep, 
+          BenderWu`Private`evencheck, BenderWu`Private`V, BenderWu`Private`Vf,
+           BenderWu`Private`TimeTemp, BenderWu`Private`even, 
+          BenderWu`Private`MonitorDelay, BenderWu`Private`k, 
+          BenderWu`Private`e0, BenderWu`Private`i, BenderWu`Private`coupling, 
+          BenderWu`Private`lmax, BenderWu`Private`vmax, 
+          BenderWu`Private`vfmax, BenderWu`Private`timesteptemp}, 
+         If[OptionValue[Echo] == True, Print["BenderWu function ver 1.0"]; 
+           Print["To turn off these messages use the option Echo->False. \nTo \
+turn off monitoring use option Monitor->False."]; Null]; If[
+           TrueQ[Head[BenderWu`Private`nu] =!= Integer], 
+           Print["The level number must be an integer. Aborting..."]; 
+           Return[]; Null]; BenderWu`Private`lmax = 2 BenderWu`Private`ord; If[
+           TrueQ[Head[
+              OptionValue[BenderWu`Private`Coupling]] === String], 
+           BenderWu`Private`coupling = ToExpression[
+             OptionValue[BenderWu`Private`Coupling]], 
+           BenderWu`Private`coupling = 
+           OptionValue[BenderWu`Private`Coupling]]; If[
+           TrueQ[Head[BenderWu`Private`Potential] == List], 
+           If[Length[BenderWu`Private`Potential] == 2, 
+             BenderWu`Private`V = Part[BenderWu`Private`Potential, 1]; 
+             BenderWu`Private`Vf = Part[BenderWu`Private`Potential, 2]; Null, 
+             Print["Error in the input of the potential! Input: \
+BenderWu[V[x],x... or BenderWu[{V0[x],V2[x]},x]"]; Return[$Aborted]; Null]; 
+           Null, BenderWu`Private`V = BenderWu`Private`Potential; 
+           BenderWu`Private`Vf = 0; Null]; BenderWu`Private`omega = Simplify[
+            Sqrt[
+             ReplaceAll[
+              D[BenderWu`Private`V, {BenderWu`Private`x, 2}], 
+              BenderWu`Private`x -> 0]]]; 
+         If[BenderWu`Private`omega == 0, 
+           Print["The quadratic term of the potential is zero. Aborting..."]; 
+           Return[$Aborted]; Null]; 
+         BenderWu`Private`e0 = 
+          ReplaceAll[
+           BenderWu`Private`omega (BenderWu`Private`nu + 1/2) + 
+            BenderWu`Private`Vf, BenderWu`Private`x -> 0]; 
+         BenderWu`Private`v = Table[
+            ReplaceAll[
+             Evaluate[
+             D[BenderWu`Private`V/BenderWu`Private`omega^2, {
+                BenderWu`Private`x, BenderWu`Private`i + 2}]/Factorial[
+              BenderWu`Private`i + 2]], BenderWu`Private`x -> 0], {
+            BenderWu`Private`i, 1, BenderWu`Private`lmax}]; 
+         BenderWu`Private`vf = Table[
+            ReplaceAll[Evaluate[
+               D[
+               BenderWu`Private`Vf/BenderWu`Private`omega, {
+                BenderWu`Private`x, BenderWu`Private`i}]]/Factorial[
+             BenderWu`Private`i], BenderWu`Private`x -> 0], {
+            BenderWu`Private`i, 1, BenderWu`Private`lmax}]; If[
+           TrueQ[Part[BenderWu`Private`v, 
+              Length[BenderWu`Private`v]] =!= 0], 
+           BenderWu`Private`vmax = Length[BenderWu`Private`v]; Null, 
+           BenderWu`Private`vmax = Length[
+              Flatten[
+               Drop[
+                Split[BenderWu`Private`v], -1]]]; Null]; If[
+           TrueQ[Part[BenderWu`Private`vf, 
+              Length[BenderWu`Private`vf]] =!= 0], 
+           BenderWu`Private`vfmax = Length[BenderWu`Private`vf]; Null, 
+           BenderWu`Private`vfmax = Length[
+              Flatten[
+               Drop[
+                Split[BenderWu`Private`vf], -1]]]; Null]; 
+         BenderWu`Private`even = 0; 
+         BenderWu`Private`evencheck = 
+          Sum[Part[BenderWu`Private`v, BenderWu`Private`i]^2 + 
+            Part[BenderWu`Private`vf, BenderWu`Private`i]^2, {
+            BenderWu`Private`i, 1, BenderWu`Private`lmax, 2}]; If[
+           TrueQ[BenderWu`Private`evencheck == 0], BenderWu`Private`lstep = 2; 
+           BenderWu`Private`even = 1; Null, BenderWu`Private`lstep = 1; 
+           BenderWu`Private`even = 0; Null]; 
+         BenderWu`Private`A = 
+          Table[0, {BenderWu`Private`l, 0, BenderWu`Private`lmax}, {
+            BenderWu`Private`k, 0, BenderWu`Private`nu + 
+             3 BenderWu`Private`lmax + 2}]; 
+         BenderWu`Private`epsilon = Table[0, {BenderWu`Private`i, 1, 
+             Floor[BenderWu`Private`lmax/2]}]; 
+         If[OptionValue[BenderWu`Private`Evaluation] == "Numerical", 
+           Part[BenderWu`Private`A, 1, BenderWu`Private`nu + 1] = N[1, 
+              OptionValue[WorkingPrecision]]; Null, 
+           Part[BenderWu`Private`A, 1, BenderWu`Private`nu + 1] = 1; Null]; 
+         BenderWu`Private`timesteptemp = 1; BenderWu`Private`timeratio = 0; 
+         BenderWu`Private`BeginingOfTime = AbsoluteTime[]; 
+         BenderWu`Private`CPUtimestep = 0; BenderWu`Private`k = 0; If[
+           And[
+           OptionValue[Monitor] == True, 
+            NumericQ[
+             BenderWu`Private`l BenderWu`Private`k 
+              BenderWu`Private`CPUtimestep BenderWu`Private`TimeLapsed] == 
+            True], BenderWu`Private`MonitorCell = 
+            PrintTemporary["Computing order: ", 
+              Dynamic[Floor[BenderWu`Private`l/2] - 1], 
+              "\nComputing polynomial power: ", 
+              Dynamic[BenderWu`Private`k], "\nCPU time per order: ", 
+              Dynamic[Floor[2 BenderWu`Private`CPUtimestep 10]/10.], 
+              " seconds.\nMemory in use: ", 
+              Dynamic[
+               Floor[MemoryInUse[]/1024^2]], " MB", "\nTotal time elapsed: ", 
+              Dynamic[
+               Floor[BenderWu`Private`TimeLapsed/60]], " minutes and ", 
+              Dynamic[
+               Floor[
+                Mod[BenderWu`Private`TimeLapsed, 60]]], " seconds."]; Null]; 
+         BenderWu`Private`tmtot = 
+          TimeConstrained[
+           For[BenderWu`Private`l = 0, BenderWu`Private`l <= 
+              BenderWu`Private`lmax, 
+              AddTo[BenderWu`Private`l, BenderWu`Private`lstep], 
+              ClearSystemCache[]; If[BenderWu`Private`l == 240, 
+                SetSystemOptions[
+                "CompileOptions" -> {
+                  "SumCompileLength" -> BenderWu`Private`lmax + 10}]]; 
+              BenderWu`Private`tm = 
+               TimeConstrained[
+                BenderWu`Private`CPUtimebeg = TimeUsed[]; 
+                 BenderWu`Private`timebeg = AbsoluteTime[]; 
+                 BenderWu`Private`TimeLapsed = 
+                  AbsoluteTime[] - BenderWu`Private`BeginingOfTime; Null; 
+                 If[BenderWu`Private`l > 0, 
+                   For[BenderWu`Private`k = 
+                    BenderWu`Private`nu + 3 BenderWu`Private`l, 
+                    BenderWu`Private`k > BenderWu`Private`nu, 
+                    Decrement[BenderWu`Private`k], 
+                    Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1] = (1/(
+                    2 (BenderWu`Private`k - 
+                    BenderWu`Private`nu))) ((BenderWu`Private`k + 2) (
+                    BenderWu`Private`k + 1) 
+                    Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 2 + 1] + 
+                    Sum[2 Part[BenderWu`Private`epsilon, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 2 
+                    BenderWu`Private`n + 1, BenderWu`Private`k + 1], {
+                    BenderWu`Private`n, 1, 
+                    Floor[BenderWu`Private`l/2]}] - 2 
+                    Sum[Part[BenderWu`Private`v, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`k - 
+                    BenderWu`Private`n - 2 + 1], {BenderWu`Private`n, 1, 
+                    Min[
+                    BenderWu`Private`k - 2, BenderWu`Private`l, 
+                    BenderWu`Private`vmax]}] - 2 
+                    Sum[Part[BenderWu`Private`vf, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`k - 
+                    BenderWu`Private`n + 1], {BenderWu`Private`n, 1, 
+                    Min[BenderWu`Private`k, BenderWu`Private`l, 
+                    BenderWu`Private`vfmax]}]); 
+                    If[OptionValue[Simplify] == True, 
+                    Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1] = Simplify[
+                    Part[
+                    BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1]]]; 
+                    If[Mod[BenderWu`Private`l, 2] == 0, 
+                    Part[BenderWu`Private`epsilon, BenderWu`Private`l/
+                    2] = (-(BenderWu`Private`nu + 2)) (BenderWu`Private`nu + 
+                    1) (Part[
+                    BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`nu + 2 + 1]/2) + 
+                    Sum[Part[BenderWu`Private`v, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`nu - 
+                    BenderWu`Private`n - 2 + 1], {BenderWu`Private`n, 1, 
+                    Min[BenderWu`Private`l, BenderWu`Private`nu - 2]}] + 
+                    Sum[Part[BenderWu`Private`vf, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`nu - 
+                    BenderWu`Private`n + 1], {BenderWu`Private`n, 1, 
+                    Min[BenderWu`Private`l, BenderWu`Private`nu]}]; 
+                    If[OptionValue[Simplify] == True, 
+                    Part[BenderWu`Private`epsilon, BenderWu`Private`l/2] = 
+                    Simplify[
+                    Part[BenderWu`Private`epsilon, BenderWu`Private`l/2]]]; 
+                    Null]; Null]; Null]; 
+                 For[BenderWu`Private`k = BenderWu`Private`nu - 1, 
+                   BenderWu`Private`k >= 0, 
+                   Decrement[BenderWu`Private`k], 
+                   Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1] = (1/(
+                    2 (BenderWu`Private`k - 
+                    BenderWu`Private`nu))) ((BenderWu`Private`k + 2) (
+                    BenderWu`Private`k + 1) 
+                    Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 2 + 1] + 
+                    Sum[2 Part[BenderWu`Private`epsilon, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 2 
+                    BenderWu`Private`n + 1, BenderWu`Private`k + 1], {
+                    BenderWu`Private`n, 1, 
+                    Floor[BenderWu`Private`l/2]}] - 2 
+                    Sum[Part[BenderWu`Private`v, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`k - 
+                    BenderWu`Private`n - 2 + 1], {BenderWu`Private`n, 1, 
+                    Min[BenderWu`Private`k - 2, BenderWu`Private`l]}] - 2 
+                    Sum[Part[BenderWu`Private`vf, BenderWu`Private`n] 
+                    Part[BenderWu`Private`A, BenderWu`Private`l - 
+                    BenderWu`Private`n + 1, BenderWu`Private`k - 
+                    BenderWu`Private`n + 1], {BenderWu`Private`n, 1, 
+                    Min[BenderWu`Private`k, BenderWu`Private`l]}]); 
+                   If[OptionValue[Simplify] == True, 
+                    Part[BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1] = Simplify[
+                    Part[
+                    BenderWu`Private`A, BenderWu`Private`l + 1, 
+                    BenderWu`Private`k + 1]]]; Null]; 
+                 BenderWu`Private`CPUtimestep = 
+                  TimeUsed[] - BenderWu`Private`CPUtimebeg; 
+                 BenderWu`Private`timestep = 
+                  AbsoluteTime[] - BenderWu`Private`timebeg; Null, 
+                 OptionValue[BenderWu`Private`MaxTime]]; 
+              If[BenderWu`Private`tm == $Aborted, 
+                BenderWu`Private`lmax = 2 Floor[(BenderWu`Private`l - 1)/2]; 
+                If[BenderWu`Private`lmax < 1, 
+                  Return[Print[
+                    "Error... No orders were computed. Check that time \
+constraint MaxTime is not too small."]; Null]; Null]; 
+                If[OptionValue[BenderWu`Private`Warnings] == True, 
+                  Print["WARNING: Time constraint for a single order exeeded \
+", 
+                    OptionValue[BenderWu`Private`MaxTime], 
+                    " seconds  at order ", BenderWu`Private`coupling^
+                    BenderWu`Private`l, "."]; 
+                  Print["Output generated to order ", 
+                    Evaluate[
+                    BenderWu`Private`coupling^BenderWu`Private`lmax]]; Null]; 
+                Break[]; Null]; Null]; Null, 
+            Evaluate[OptionValue[BenderWu`Private`TotalMaxTime] 60]]; 
+         If[BenderWu`Private`tmtot == $Aborted, 
+           BenderWu`Private`lmax = 2 Floor[(BenderWu`Private`l - 1)/2]; 
+           If[BenderWu`Private`lmax < 1, 
+             Return[Print[
+                "Error... No orders were computed. Check that time constraint \
+TotalMaxTime is not too small."]; Null]; Null]; 
+           If[OptionValue[BenderWu`Private`Warnings] == True, 
+             Print["WARNING: Time set to complete the evaluation ", 
+                N[
+                 OptionValue[BenderWu`Private`TotalMaxTime], 1], 
+                " minutes  was exceeded at order ", BenderWu`Private`coupling^
+                BenderWu`Private`l, "."] Print["Output generated to order ", 
+                Evaluate[BenderWu`Private`coupling^BenderWu`Private`lmax]]; 
+             Null]; Null]; NotebookDelete[BenderWu`Private`MonitorCell]; 
+         If[OptionValue[Echo] == True, 
+           Print["Longest CPU time spend computing a single order is ", 
+             Floor[BenderWu`Private`CPUtimestep 10]/10., " seconds"]; 
+           Print["Longest absolute time spend computing a single order is ", 
+             Floor[BenderWu`Private`timestep 10]/10., " seconds"]; 
+           Print["Total time needed for the computation ", 
+             Floor[(AbsoluteTime[] - BenderWu`Private`BeginingOfTime)/60], 
+             " minutes and ", 
+             Floor[Mod[AbsoluteTime[] - BenderWu`Private`BeginingOfTime, 60] 
+               10]/10., " seconds"]; Null]; 
+         BenderWu`Private`epsilon = 
+          Table[Part[BenderWu`Private`epsilon, BenderWu`Private`i]/
+            BenderWu`Private`omega^BenderWu`Private`i, {
+            BenderWu`Private`i, 1, BenderWu`Private`lmax/2}]; 
+         BenderWu`Private`A = 
+          Table[Part[
+             BenderWu`Private`A, BenderWu`Private`lp, BenderWu`Private`k] 
+            Sqrt[BenderWu`Private`omega]^(BenderWu`Private`k - 
+              BenderWu`Private`lp), {
+            BenderWu`Private`lp, 1, BenderWu`Private`lmax + 1}, {
+            BenderWu`Private`k, 1, BenderWu`Private`nu + 
+             3 BenderWu`Private`lmax + 1}]; Return[
+           BenderWu`BWProcess[{
+             Join[{
+               Evaluate[
+                ReplaceAll[BenderWu`Private`V, BenderWu`Private`x -> 0]]}, {
+              BenderWu`Private`e0}, BenderWu`Private`omega 
+              BenderWu`Private`epsilon], BenderWu`Private`A, {
+             BenderWu`Private`x, BenderWu`Private`nu, BenderWu`Private`lmax, 
+              BenderWu`Private`even}}, BenderWu`Private`Output -> 
+            OptionValue[BenderWu`Private`Output], 
+            BenderWu`Private`OutputStyle -> 
+            OptionValue[BenderWu`Private`OutputStyle], 
+            BenderWu`Private`SeriesOutput -> 
+            OptionValue[BenderWu`Private`SeriesOutput], 
+            BenderWu`Private`Evaluation -> 
+            OptionValue[BenderWu`Private`Evaluation], 
+            BenderWu`Private`Coupling -> 
+            OptionValue[BenderWu`Private`Coupling], 
+            BenderWu`Private`HighestPower -> 
+            OptionValue[BenderWu`Private`HighestPower], 
+            BenderWu`Private`ArrayForm -> 
+            OptionValue[BenderWu`Private`ArrayForm]]]; Null]}], "SubValues" -> 
+    None, "DefaultValues" -> 
+    Information`InformationValueForm[
+     DefaultValues, BenderWu`BenderWu, {
+      SyntaxInformation[BenderWu`BenderWu] -> {"ArgumentsPattern" -> {
+           Blank[], 
+           Blank[], 
+           Blank[], 
+           Blank[], 
+           OptionsPattern[]}, "LocalVariables" -> {"Solve", {2}}}}], 
+    "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> {
+     BenderWu`Private`Output -> "BWProcess", WorkingPrecision -> 
+      MachinePrecision, BenderWu`Private`MaxTime -> DirectedInfinity[1], 
+      BenderWu`Private`TotalMaxTime -> DirectedInfinity[1], 
+      BenderWu`Private`Warnings -> True, Simplify -> False, 
+      BenderWu`Private`OutputStyle -> "Array", BenderWu`Private`SeriesOutput -> 
+      "Coupling", BenderWu`Private`Evaluation -> "Analytical", 
+      BenderWu`Private`Coupling -> "g", BenderWu`Private`HighestPower -> 0, 
+      BenderWu`Private`ArrayForm -> False, Echo -> False, Monitor -> True}, 
+    "Attributes" -> {HoldAll}, "FullName" -> "BenderWu`BenderWu"|>, 
+   False]]], "Output",
+ CellChangeTimes->{3.8848534135687084`*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"461baef9-4d8a-4177-8640-8d2d276fb361"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BW", "=", 
+   RowBox[{"BenderWu", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "^", "2"}], "/", "2"}], "+", 
+      RowBox[{"x", "^", "4"}]}], ",", "x", ",", "0", ",", "10"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.884853433176*^9, 3.8848534465218554`*^9}, {
+  3.884853755984818*^9, 3.8848537561894436`*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"b7a09349-63bf-4d93-85b2-330a5c2dfa35"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["BW"], "Input",
+ CellChangeTimes->{{3.884853463247819*^9, 3.8848534636767735`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"e5aa14b6-ea41-4fb0-a3d0-f2d4fa7f1fc3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     FractionBox["1", "2"], ",", 
+     FractionBox["3", "4"], ",", 
+     RowBox[{"-", 
+      FractionBox["21", "8"]}], ",", 
+     FractionBox["333", "16"], ",", 
+     RowBox[{"-", 
+      FractionBox["30885", "128"]}], ",", 
+     FractionBox["916731", "256"], ",", 
+     RowBox[{"-", 
+      FractionBox["65518401", "1024"]}], ",", 
+     FractionBox["2723294673", "2048"], ",", 
+     RowBox[{"-", 
+      FractionBox["1030495099053", "32768"]}], ",", 
+     FractionBox["54626982511455", "65536"], ",", 
+     RowBox[{"-", 
+      FractionBox["6417007431590595", "262144"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["3", "4"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1", "4"]}], ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       FractionBox["21", "8"], ",", "0", ",", 
+       FractionBox["31", "32"], ",", "0", ",", 
+       FractionBox["13", "48"], ",", "0", ",", 
+       FractionBox["1", "32"], ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["333", "16"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["243", "32"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["271", "128"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["47", "128"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["17", "384"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1", "384"]}], ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       FractionBox["30885", "128"], ",", "0", ",", 
+       FractionBox["2777", "32"], ",", "0", ",", 
+       FractionBox["18461", "768"], ",", "0", ",", 
+       FractionBox["9195", "2048"], ",", "0", ",", 
+       FractionBox["979", "1536"], ",", "0", ",", 
+       FractionBox["599", "9216"], ",", "0", ",", 
+       FractionBox["7", "1536"], ",", "0", ",", 
+       FractionBox["1", "6144"], ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["916731", "256"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["651363", "512"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["89673", "256"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["69107", "1024"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["250183", "24576"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["29177", "24576"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1325", "12288"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["269", "36864"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["25", "73728"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1", "122880"]}], ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       FractionBox["65518401", "1024"], ",", "0", ",", 
+       FractionBox["23046319", "1024"], ",", "0", ",", 
+       FractionBox["75770813", "12288"], ",", "0", ",", 
+       FractionBox["2476011", "2048"], ",", "0", ",", 
+       FractionBox["9259481", "49152"], ",", "0", ",", 
+       FractionBox["13796435", "589824"], ",", "0", ",", 
+       FractionBox["77173", "32768"], ",", "0", ",", 
+       FractionBox["112483", "589824"], ",", "0", ",", 
+       FractionBox["4055", "331776"], ",", "0", ",", 
+       FractionBox["349", "589824"], ",", "0", ",", 
+       FractionBox["29", "1474560"], ",", "0", ",", 
+       FractionBox["1", "2949120"], ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["2723294673", "2048"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1900738887", "4096"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1037387179", "8192"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["411558719", "16384"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["392840431", "98304"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["101245699", "196608"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["43151765", "786432"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["11441483", "2359296"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["838357", "2359296"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["150911", "7077888"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["108553", "106168320"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1319", "35389440"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["11", "11796480"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1", "82575360"]}], ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       FractionBox["1030495099053", "32768"], ",", "0", ",", 
+       FractionBox["178679039237", "16384"], ",", "0", ",", 
+       FractionBox["291628341269", "98304"], ",", "0", ",", 
+       FractionBox["19448990361", "32768"], ",", "0", ",", 
+       FractionBox["75358651093", "786432"], ",", "0", ",", 
+       FractionBox["3733838213", "294912"], ",", "0", ",", 
+       FractionBox["2200420397", "1572864"], ",", "0", ",", 
+       FractionBox["3280019929", "25165824"], ",", "0", ",", 
+       FractionBox["291395659", "28311552"], ",", "0", ",", 
+       FractionBox["38950649", "56623104"], ",", "0", ",", 
+       FractionBox["16409753", "424673280"], ",", "0", ",", 
+       FractionBox["9150343", "5096079360"], ",", "0", ",", 
+       FractionBox["28487", "424673280"], ",", "0", ",", 
+       FractionBox["541", "283115520"], ",", "0", ",", 
+       FractionBox["37", "990904320"], ",", "0", ",", 
+       FractionBox["1", "2642411520"], ",", "0", ",", "0", ",", "0", ",", "0",
+        ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+       ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["54626982511455", "65536"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["37696919264379", "131072"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["10228319926141", "131072"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["2060259959333", "131072"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["4036187405567", "1572864"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1086164645615", "3145728"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["15391050197", "393216"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["71320205783", "18874368"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["31524603955", "100663296"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["750036419", "33554432"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["311114717", "226492416"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["245686033", "3397386240"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["21934507", "6794772480"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["489047", "4076863488"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["36661", "10192158720"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["653", "7927234560"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["41", "31708938240"]}], ",", "0", ",", 
+       RowBox[{"-", 
+        FractionBox["1", "95126814720"]}], ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       FractionBox["6417007431590595", "262144"], ",", "0", ",", 
+       FractionBox["2205170498765479", "262144"], ",", "0", ",", 
+       FractionBox["7165277933588117", "3145728"], ",", "0", ",", 
+       FractionBox["120939235709331", "262144"], ",", "0", ",", 
+       FractionBox["478056886880743", "6291456"], ",", "0", ",", 
+       FractionBox["195680278973305", "18874368"], ",", "0", ",", 
+       FractionBox["30147016064305", "25165824"], ",", "0", ",", 
+       FractionBox["497736819293", "4194304"], ",", "0", ",", 
+       FractionBox["6145563206639", "603979776"], ",", "0", ",", 
+       FractionBox["5503872304091", "7247757312"], ",", "0", ",", 
+       FractionBox["2689270862993", "54358179840"], ",", "0", ",", 
+       FractionBox["917469605837", "326149079040"], ",", "0", ",", 
+       FractionBox["35015249", "251658240"], ",", "0", ",", 
+       FractionBox["969209047", "163074539520"], ",", "0", ",", 
+       FractionBox["74153917", "342456532992"], ",", "0", ",", 
+       FractionBox["7527391", "1141521776640"], ",", "0", ",", 
+       FractionBox["18541", "114152177664"], ",", "0", ",", 
+       FractionBox["2327", "761014517760"], ",", "0", ",", 
+       FractionBox["1", "25367150592"], ",", "0", ",", 
+       FractionBox["1", "3805072588800"], ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+       "0", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "20", ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.884853464508523*^9, 3.8848537604248443`*^9},
+ CellLabel->"Out[26]=",ExpressionUUID->"04e4033a-ba6d-49a0-9f3d-18310d4ad41b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BW", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8848534793892145`*^9, 3.8848534812585793`*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"d1fafdc9-e5e2-45d4-b21b-85a0a9d44804"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", 
+   FractionBox["1", "2"], ",", 
+   FractionBox["3", "4"], ",", 
+   RowBox[{"-", 
+    FractionBox["21", "8"]}], ",", 
+   FractionBox["333", "16"], ",", 
+   RowBox[{"-", 
+    FractionBox["30885", "128"]}], ",", 
+   FractionBox["916731", "256"], ",", 
+   RowBox[{"-", 
+    FractionBox["65518401", "1024"]}], ",", 
+   FractionBox["2723294673", "2048"], ",", 
+   RowBox[{"-", 
+    FractionBox["1030495099053", "32768"]}], ",", 
+   FractionBox["54626982511455", "65536"], ",", 
+   RowBox[{"-", 
+    FractionBox["6417007431590595", "262144"]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.884853481604935*^9, 3.884853766322649*^9},
+ CellLabel->"Out[27]=",ExpressionUUID->"12e5633d-9944-44b8-98c6-ef96e3e4aca2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"BW", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.8848534869680805`*^9, 3.884853626002144*^9}, {
+  3.884853701352322*^9, 3.884853706698392*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"dd5dec34-58d0-4dde-93cf-42d94edcafd8"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, 
+   {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`], 
+    AbsoluteThickness[1.6], 
+    PointBox[{{1., 0.}, {2., 0.5}, {3., 0.75}, {4., -2.625}, {5., 20.8125}, {
+     6., -241.2890625}, {7., 3580.98046875}, {8., -63982.8134765625}, {9., 
+     1.3297337270507812`*^6}, {10., -3.144821469277954*^7}, {11., 
+     8.335416032631683*^8}, {12., -2.4478940702783947`*^10}}]}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->{581.25, Automatic},
+  Method->{
+   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "DefaultPlotStyle" -> {
+      Directive[
+       RGBColor[0.368417, 0.506779, 0.709798], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.880722, 0.611041, 0.142051], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.560181, 0.691569, 0.194885], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.922526, 0.385626, 0.209179], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.528488, 0.470624, 0.701351], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.772079, 0.431554, 0.102387], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.363898, 0.618501, 0.782349], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[1, 0.75, 0], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.647624, 0.37816, 0.614037], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.571589, 0.586483, 0.], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.915, 0.3325, 0.2125], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.40082222609352647`, 0.5220066643438841, 0.85], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.9728288904374106, 0.621644452187053, 0.07336199581899142], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.736782672705901, 0.358, 0.5030266573755369], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.28026441037696703`, 0.715, 0.4292089322474965], 
+       AbsoluteThickness[1.6]]}, "DomainPadding" -> Scaled[0.02], 
+    "PointSizeFunction" -> "SmallPointSize", "RangePadding" -> Scaled[0.05], 
+    "OptimizePlotMarkers" -> True, "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 12.}, {-165328.50439453125`, 104926.67138671875`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.884853513677389*^9, 3.8848536267057962`*^9}, 
+   3.8848537079808617`*^9, 3.8848537685357356`*^9},
+ CellLabel->"Out[28]=",ExpressionUUID->"7dd7501d-e58b-4009-bfd0-b4b64fde1284"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["Plot"], "Input",
+ CellChangeTimes->{{3.884853587704262*^9, 3.884853595705649*^9}, {
+  3.884853642559643*^9, 
+  3.8848536430830345`*^9}},ExpressionUUID->"8a2839c4-542b-4e94-a4c6-\
+2ce7f91e0c4a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", 
+   ",", "8", ",", "9", ",", "10", ",", "11", ",", "12", ",", "13", ",", "14", 
+   ",", "15", ",", "16", ",", "17", ",", "18", ",", "19", ",", "20", ",", 
+   "21", ",", "22", ",", "23", ",", "24", ",", "25", ",", "26", ",", "27", 
+   ",", "28", ",", "29", ",", "30", ",", "31", ",", "32", ",", "33", ",", 
+   "34", ",", "35", ",", "36", ",", "37", ",", "38", ",", "39", ",", "40", 
+   ",", "41", ",", "42", ",", "43", ",", "44", ",", "45", ",", "46", ",", 
+   "47", ",", "48", ",", "49", ",", "50", ",", "51", ",", "52", ",", "53", 
+   ",", "54", ",", "55", ",", "56", ",", "57", ",", "58", ",", "59", ",", 
+   "60", ",", "61", ",", "62", ",", "63", ",", "64", ",", "65", ",", "66", 
+   ",", "67", ",", "68", ",", "69", ",", "70", ",", "71", ",", "72", ",", 
+   "73", ",", "74", ",", "75", ",", "76", ",", "77", ",", "78", ",", "79", 
+   ",", "80", ",", "81", ",", "82", ",", "83", ",", "84", ",", "85", ",", 
+   "86", ",", "87", ",", "88", ",", "89", ",", "90", ",", "91", ",", "92", 
+   ",", "93", ",", "94", ",", "95", ",", "96", ",", "97", ",", "98", ",", 
+   "99", ",", "100"}], "}"}]], "Output",
+ CellChangeTimes->{3.8848535961540737`*^9},
+ CellLabel->"Out[19]=",ExpressionUUID->"1656df87-c5e7-4f8b-90fb-9a422a1437c4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BWProcess", "[", 
+   RowBox[{"BW", ",", 
+    RowBox[{"OutputStyle", "->", "\"\<Series\>\""}], ",", 
+    RowBox[{"Order", "->", "10"}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{3.8848538207156477`*^9, 3.8848538268670225`*^9}},
+ CellLabel->"In[30]:=",ExpressionUUID->"714fd45f-4efa-4ee4-823c-89547d2325ab"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], "+", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["g", "2"]}], "4"], "-", 
+  FractionBox[
+   RowBox[{"21", " ", 
+    SuperscriptBox["g", "4"]}], "8"], "+", 
+  FractionBox[
+   RowBox[{"333", " ", 
+    SuperscriptBox["g", "6"]}], "16"], "-", 
+  FractionBox[
+   RowBox[{"30885", " ", 
+    SuperscriptBox["g", "8"]}], "128"], "+", 
+  FractionBox[
+   RowBox[{"916731", " ", 
+    SuperscriptBox["g", "10"]}], "256"], "-", 
+  FractionBox[
+   RowBox[{"65518401", " ", 
+    SuperscriptBox["g", "12"]}], "1024"], "+", 
+  FractionBox[
+   RowBox[{"2723294673", " ", 
+    SuperscriptBox["g", "14"]}], "2048"], "-", 
+  FractionBox[
+   RowBox[{"1030495099053", " ", 
+    SuperscriptBox["g", "16"]}], "32768"], "+", 
+  FractionBox[
+   RowBox[{"54626982511455", " ", 
+    SuperscriptBox["g", "18"]}], "65536"], "-", 
+  FractionBox[
+   RowBox[{"6417007431590595", " ", 
+    SuperscriptBox["g", "20"]}], "262144"]}]], "Output",
+ CellChangeTimes->{{3.8848538214757004`*^9, 3.884853827847124*^9}},
+ CellLabel->"Out[30]=",ExpressionUUID->"3de13bf2-56df-4751-810c-47acb54c54f3"]
+}, Open  ]]
+},
+WindowSize->{808.5, 684.75},
+WindowMargins->{{71.25, Automatic}, {19.5, Automatic}},
+FrontEndVersion->"13.2 para Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"b0fe9139-b025-4cf8-bc2b-a73cc9c12d60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 220, 3, 43, "Input",ExpressionUUID->"5cea06be-6032-4097-b827-d2ee780c4249"],
+Cell[803, 27, 714, 14, 46, "Message",ExpressionUUID->"83d5af22-90f9-4a5b-8100-fbafecc6589c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1554, 46, 197, 3, 28, "Input",ExpressionUUID->"0745c3fc-5043-4690-ab87-69906766317a"],
+Cell[1754, 51, 90794, 1809, 1419, "Output",ExpressionUUID->"461baef9-4d8a-4177-8640-8d2d276fb361"]
+}, Open  ]],
+Cell[92563, 1863, 456, 12, 28, "Input",ExpressionUUID->"b7a09349-63bf-4d93-85b2-330a5c2dfa35"],
+Cell[CellGroupData[{
+Cell[93044, 1879, 175, 2, 28, "Input",ExpressionUUID->"e5aa14b6-ea41-4fb0-a3d0-f2d4fa7f1fc3"],
+Cell[93222, 1883, 21193, 382, 1686, "Output",ExpressionUUID->"04e4033a-ba6d-49a0-9f3d-18310d4ad41b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[114452, 2270, 227, 4, 28, "Input",ExpressionUUID->"d1fafdc9-e5e2-45d4-b21b-85a0a9d44804"],
+Cell[114682, 2276, 750, 20, 85, "Output",ExpressionUUID->"12e5633d-9944-44b8-98c6-ef96e3e4aca2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[115469, 2301, 348, 7, 64, "Input",ExpressionUUID->"dd5dec34-58d0-4dde-93cf-42d94edcafd8"],
+Cell[115820, 2310, 3748, 96, 356, "Output",ExpressionUUID->"7dd7501d-e58b-4009-bfd0-b4b64fde1284"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119605, 2411, 207, 4, 43, "Input",ExpressionUUID->"8a2839c4-542b-4e94-a4c6-2ce7f91e0c4a"],
+Cell[119815, 2417, 1341, 20, 90, "Output",ExpressionUUID->"1656df87-c5e7-4f8b-90fb-9a422a1437c4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[121193, 2442, 345, 7, 64, "Input",ExpressionUUID->"714fd45f-4efa-4ee4-823c-89547d2325ab"],
+Cell[121541, 2451, 1116, 34, 113, "Output",ExpressionUUID->"3de13bf2-56df-4751-810c-47acb54c54f3"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
