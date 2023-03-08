@@ -2,33 +2,42 @@ from sympy import *
 import matplotlib.pyplot as plt
 # Setting Up all variables and functions of use
 x = Symbol('x',positive = True)
-ebar = Symbol('ebar',positive = True)
 r = Symbol('r',positive = True)
-Abar = Symbol('Abar')
+Abar = Symbol('Abar',positive = True)
 e = Symbol('e',positive = True)
-V = Abar* r**4
-#V = -ebar**2/r
 k = Symbol('k', positive = True)
 A = Symbol('A',positive=True)
+
+
+#V = Abar* r**4
+#V = 1/3**2* log(r)
+#ebar = e/k
+#V = -ebar**2/r
+
 Veff = 1/(8* r**2) + V
-r0 = 4**(1/(-5))* (Abar *4)**(1/(-6))
+#r0 = 4**(1/(-5))* (Abar *4)**(1/(-6))
+r0 =3/2 
 #r0 = 1/(4*ebar**2)
-#print(Veff)
+#print(simplify(diff(Veff,r).subs(r,r0)))
 Veffbar = factor(simplify(Veff.subs(r,x+r0)- Veff.subs(r,r0)))
 #print(Veffbar)
 
 
 #Getting the first coefficients
 Eminustwo = Veff.subs(r,r0)
-#print(Eminustwo)
-phiminusone =  simplify(-sqrt(2* Veffbar))
+print(Eminustwo)
+phiminusone =  nsimplify(-sqrt(2* Veffbar))
 #print(phiminusone)
-Eminusone = -1/2* diff(phiminusone,x).subs(x,0) - 1/(2* r0**2)
-#print(Eminusone)
-phizero = simplify((1/2 * diff(phiminusone,x) + 1/(2*(x+r0)**2) + Eminusone)/(-phiminusone))
-Ezero = -1/2 *diff(phizero,x).subs(x,0) - 1/2* phizero.subs(x,0)**2 + 3/(8* r0**2)
-phione = simplify((1/2* diff(phizero,x) + 1/2* phizero**2 - 3/(8* (x+r0)**2) + Ezero)/(-phiminusone))
-Eone = -1/2* diff(phione,x).subs(x,0) - 1/2 *(phione.subs(x,0)* phizero.subs(x,0) + phione.subs(x,0)* phizero.subs(x,0))
+print(-1/2* diff(phiminusone,x).subs(x,0) - 1/(2* r0**2))
+Eminusone = nsimplify(-1/2* diff(phiminusone,x).subs(x,0) - 1/(2* r0**2))
+print(Eminusone)
+phizero = nsimplify((1/2 * diff(phiminusone,x) + 1/(2*(x+r0)**2) + Eminusone)/(-phiminusone))
+#print(phizero)
+Ezero = nsimplify(-1/2 *diff(phizero,x).subs(x,0) - 1/2* phizero.subs(x,0)**2 + 3/(8* r0**2))
+print(Ezero)
+phione = nsimplify((1/2* diff(phizero,x) + 1/2* phizero**2 - 3/(8* (x+r0)**2) + Ezero)/(-phiminusone))
+Eone = nsimplify(-1/2* diff(phione,x).subs(x,0) - 1/2 *(phione.subs(x,0)* phizero.subs(x,0) + phione.subs(x,0)* phizero.subs(x,0)))
+print(Eone)
 #print(diff(phione,x).subs(x,0))
 phis = [phiminusone,phizero,phione]
 phis0 = [phizero,phione]
@@ -37,11 +46,10 @@ Elist = [Eminustwo,Eminusone,Ezero,Eone]
 #print(phis)
 
 
+
 # Dynamic Programming approach
 def approximate_to_order(Elistinit,phiszero,order):
     iter = order -4
-    """if order < 4:
-        return Elistinit[0:order]"""
     Elist =Elistinit.copy()
     phis0 = phiszero.copy()
     n = 2
@@ -68,10 +76,11 @@ def approximate_to_order(Elistinit,phiszero,order):
     else:
         length = len(Elist)
     Energy_list = [klist[i]*Elist[i] for i in range(length)]
-    Energy_value = sum([Energy_list[i].subs([(Abar,1/k),(k,3)]) for i in range(len(Energy_list))])
-    #Energy_value = sum([Energy_list[i].subs([(ebar,e/k),(k,3)]) for i in range(len(Energy_list))])
-    #Real_value = -e**4/2
-    Real_value =2.393644
+    #Energy_value = sum([Energy_list[i].subs([(Abar,1/k),(k,3)]) for i in range(len(Energy_list))])
+    Energy_value = sum([Energy_list[i].subs([(k,3)]) for i in range(len(Energy_list))])
+    Real_value = -e**4/2
+    #Real_value =2.393644
+    #Real_value = 2.04
     error = abs((Energy_value-Real_value)/Real_value)
     accuracy = 1-error
     #print(accuracy)
@@ -86,4 +95,4 @@ def plot(n):
         error_list[j] = approximate_to_order(Elistinit=Elist,phiszero=phis0,order=n_list[j])[1]
     print(n_list,error_list)
 
-plot(10)
+plot(20)
