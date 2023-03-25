@@ -7,7 +7,6 @@ import cProfile
 import re
 import numpy as np
 
-
 class Memoize(dict):
     def __init__(self, func):
          self.func = func 
@@ -104,60 +103,37 @@ def potential(option):
     k = Symbol('k',positive = True)
     p = Symbol('p',positive = True )
     var = Symbol('var',positive = True)
-    if option == 'Coulomb':
-        p0 =1/(4*var)
-        potential = - var/p
-        value = 1/3**(3/2)
+    if option == 'Sqrt':
+        potential = var*p**(1/2)
+        p0 = (1/(2*var))**(2/5)
+        value = 1/(3**(3/4))
+    elif option == 'Type 3':
+        potential = - var*p**(-1.5)
+        p0 = 1/(36*var**2)
+        value = 1/(3**(7/4))
+    elif option == 'Type 4':
+        potential = var*p**(3/20)
+        p0 = (5/(3*var))**(20/43)
+        value = 1/3**(37/40)
+    elif option == 'Log':
+        potential = var*log(3**(1/2)*p)
+        p0 = 1/(4*var)**(1/2)
+        value = 1/(3)
     elif option == 'Quartic':
         potential = var* p**4
         p0 = 1/(2**(2/3)*var**(1/6))
-        value = N
-    elif option == 'Linear':
-        potential = var*p
-        p0 =1/((var)**(1/3)*2**(2/3))
-        value =  2**(7/2)/3**(1/2)
+        value = 3
     elif option == 'Quintic':
         potential =var*p**5
         p0 = 1/(2**(2/7)*(var)**(1/7)*5**(1/7))
         value =  3**(3/2)
-    elif option == 'Harmonic':
-        potential =-var *p**2
-        p0 = 1/(2**(3/4)*var**(1/4))
-        value = 1/2
-    elif option == 'Type 1':
-        potential = -var * p**(-1/5)
-        p0 = (5/(4*var))**(5/9)
-        value = 2**(1.7)/(5*sqrt(5)**(1/5))
-    elif option == 'Type 2':
-        potential = -var * p**(-4/5)
-        p0 = (5/(16*var))**(5/6)
-        value = 2**(0.8)/(3*sqrt(3)**(4/5))
-    elif option == 'Sqrt':
-        potential = var*p**(1/2)
-        p0 = (1/(2*var))**(2/5)
-        value = 1/(2*3**(3/4))
-    elif option == 'Type 3':
-        potential = - var*p**(-1.5)
-        p0 = 1/(36*var**2)
-        value = 1/(2*3**(7/4))
-    elif option == 'Log':
-        potential = var*log(3**(1/2)*p)
-        p0 = 1/(4*var)**(1/2)
-        value = 1/(3*2)
-    elif option == 'Inverse Sqrt':
-        potential = -var*p**(-1/2)
-        p0 = 1/((2*var)**(2/3))
-        value = 1/3**(5/4)
-    elif option == 'Charm':
-        potential = -7**(-3/2)/(2*p) +p*7**(-1/2)/(2)
-        p0  =1.054402304367833153729482
-        value =1
-    k = 7
+    k = 3
+    value = value/2
     V = (1/(8*p**2) + potential)
     Eminustwo = V.subs(p,p0)*k
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-a = plot(10,"Charm")
+a = plot(10,"Quintic")
 print(a)
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')
