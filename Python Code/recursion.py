@@ -99,7 +99,7 @@ def plot(n,option):
         else:
             Elist[j] = collect(Elist[j-1] + Enminusone(j-1,V,p0,var,value,k)[1],k)
         print(j)
-    return(n_list,[2*N(Elist[i]) for i in range(len(Elist))])
+    return(n_list,[N(Elist[i]) for i in range(len(Elist))])
 def potential(option):
     k = Symbol('k',positive = True)
     p = Symbol('p',positive = True )
@@ -148,42 +148,30 @@ def potential(option):
         potential = -var*p**(-1/2)
         p0 = 1/((2*var)**(2/3))
         value = 1/3**(5/4)
-    elif option == 'Charm':
-        potential = -3**(-3/2)/(2*p) +p*3**(-1/2)/(2)
-        p0  =0.8372665140289375792830123
-        value =1
     elif option == 'Hulten':
-        a = 0.1
-        potential = -0.1/7*exp(-7**(1/2)*0.1*p)/(1-exp(-0.1*7**(1/2)*p))
-        p0 =5.5106
+        k =5
+        a = 0.01
+        potential = -a/k*exp(-k**(1/2)*a*p)/(1-exp(-a*k**(1/2)*p))
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
+        print(p0)
         value = 1
     elif option == 'Morse':
         potential = 10/3*(exp(-2*3**(1/2)*p)-2*exp(-3**(1/2)*p))
         p0 = 0.443191
         value =1
-    elif option == 'Martin':
-        potential = 6.8698/(3*2)*(p*3**(1/2))**(0.1)-8.064/(3*2)
-        p0 = 1.41299
-        value =1
     elif option == 'Dressed Coulomb':
-        potential = -1/9 * 1/(9*p**2+1)**(1/2)
-        p0 =6.77452771823243
-        value = 1
-    elif option == 'Spiked Harmonic':
-        potential = p**2/2 + 0.01/(p*3**(3/2)*2)
-        p0 = 0.707588
-        value = 1
-    elif option == 'Max Min':
-        potential = p**2/2 -3**(1/2)*p**3/(10*2)
-        p0 = 0.746252
+        k = 9
+        lambd = 5
+        potential = -1/k * 1/(k*p**2+lambd**2)**(1/2)
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
         value = 1
 
-    k = 3
+
     V = (1/(8*p**2) + potential)
     Eminustwo = V.subs(p,p0)*k
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-a = plot(10,"Max Min")
+a = plot(10,"Dressed Coulomb")
 print(a)
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')

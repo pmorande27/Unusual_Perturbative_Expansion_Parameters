@@ -127,13 +127,33 @@ def potential(option):
         potential =var*p**5
         p0 = 1/(2**(2/7)*(var)**(1/7)*5**(1/7))
         value =  3**(3/2)
-    k = 3
+    elif option == 'Cornell':
+        a = 1
+        b = 0.1
+        k = 13
+        potential = -a*k**(-3/2)/(2*p) +b**2*p*k**(-1/2)/(2)
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
+        value =1
+    elif option == 'Spiked Harmonic':
+        potential = p**2/2 - 10/(p*3**(3/2)*2)
+        p0 =0.25539
+        value = 1
+    elif option == 'Max Min':
+        potential = p**2/2 -3**(1/2)*p**3/(10*2)
+        p0 = 0.746252
+        value = 1
+    elif option == 'Martin':
+        potential = 6.8698/(3*2)*(p*3**(1/2))**(0.1)-8.064/(3*2)
+        p0 = 1.41299
+        value =1 
+    
+
     value = value/2
     V = (1/(8*p**2) + potential)
     Eminustwo = V.subs(p,p0)*k
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-a = plot(10,"Quintic")
+a = plot(10,"Cornell")
 print(a)
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')
