@@ -135,8 +135,10 @@ def potential(option):
         p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
         value =1
     elif option == 'Spiked Harmonic':
-        potential = p**2/2 - 10/(p*3**(3/2)*2)
-        p0 =0.25539
+        a = 0.001
+        k=3
+        potential = p**2/2 + a/(p**(4)*k**(3)*2)
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
         value = 1
     elif option == 'Max Min':
         potential = p**2/2 -3**(1/2)*p**3/(10*2)
@@ -154,6 +156,6 @@ def potential(option):
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-a = plot(10,"Cornell")
+a = plot(10,"Spiked Harmonic")
 print(a)
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')

@@ -146,11 +146,31 @@ def potential(option):
         potential = var*p
         p0 =1/((var)**(1/3)*2**(2/3))
         value =  2**(7/2)/3**(1/2)
+    elif option == 'Dressed Coulomb':
+        k = 3
+        lambd = 1
+        potential = -1/k * 1/(k*p**2+lambd**2)**(1/2)
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
+        value = 1
+    elif option == 'Cornell':
+        val = 0.92
+        a = 0.52
+        b = 1/(2.34**2)
+        k = 5
+        potential =val* (-a*k**(-3/2)/(p) +b*p*k**(-1/2))
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
+        value =1
+    elif option == 'Spiked Harmonic':
+        a = 0.000001
+        k=3
+        potential = p**2 + a/(p**(4)*k**(3))
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
+        value = 1
     k = 3
     V = (1/(8*p**2) + potential)
     Eminustwo = V.subs(p,p0)*k
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-print(plot(10,"Linear"))
+print(plot(10,"Spiked Harmonic"))
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')

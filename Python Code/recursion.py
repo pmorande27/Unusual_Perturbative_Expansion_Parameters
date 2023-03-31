@@ -105,8 +105,8 @@ def potential(option):
     p = Symbol('p',positive = True )
     var = Symbol('var',positive = True)
     if option == 'Coulomb':
-        p0 =1/(4*var)
-        potential = - var/p
+        p0 =1/(4*1/3**(3/2))
+        potential = -1/3**(3/2)/p
         value = 1/3**(3/2)
     elif option == 'Quartic':
         potential = var* p**4
@@ -160,18 +160,25 @@ def potential(option):
         p0 = 0.443191
         value =1
     elif option == 'Dressed Coulomb':
-        k = 9
-        lambd = 5
+        k = 5
+        lambd = 10
         potential = -1/k * 1/(k*p**2+lambd**2)**(1/2)
         p0 = nsolve(diff(1/(8*p**2) + potential,p),p,1)
         value = 1
-
+    elif option == 'Cornell':
+        val = 2.59
+        a = 0.52
+        b = 1/(2.34**2)
+        k = 3
+        potential =val* (-a*k**(-3/2)/(p) +b*p*k**(-1/2))
+        p0 = nsolve(diff(1/(8*p**2) + potential,p),p,0.5)
+        value =1
 
     V = (1/(8*p**2) + potential)
     Eminustwo = V.subs(p,p0)*k
     return (V,p0,Eminustwo,var,value,k)
 #V,p0,Eminustwo,vars,value = potential('Coulomb')
 #print(Enminusone(10,V,p0,vars,value))
-a = plot(10,"Dressed Coulomb")
+a = plot(10,"Cornell")
 print(a)
 #cProfile.run('re.compile(print(plot(50,"Coulomb")))')
